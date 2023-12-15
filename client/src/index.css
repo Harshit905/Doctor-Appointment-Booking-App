@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+/* antd Over-ride */
+input{
+  border-radius: 0 !important;
+  border: 1px solid rgba(128,128,128,0.521) !important;
+  height: 40px !important;
+}
+input:focus{
+  outline: none !important;
+  box-shadow: none !important;
+  border: 1px solid rgb(0, 9, 178) !important;
+}
+label{
+  font-size: 16px !important;
+  color: rgb(0, 0, 0)  !important;
+}
+.ant-form-item{
+  margin: 10px 0  !important;
+}
+
+/*Common styling */
+.loader-parent{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.7;
+  background-color: black;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+.card-title{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.normal-text{
+  font-size: 1rem;
+}
+.card{
+  box-shadow: 0 0 2px grey;
+}
+.primary-button{
+  border-color: #005555 !important;
+  background-color: #005555 !important;
+  height: 40px !important;
+  width: 100% !important;
+  color: white !important;
+  font-size: 16px !important;
+  border-radius: 0 !important;
+}
+
+.anchor{
+  color: black;
+  text-decoration: underline;
+  font-size: 16px !important;
+}
+.anchor:hover{
+  text-decoration: underline !important;
+}
+
+.ant-input-affix-wrapper {
+  padding: 0 !important;
+  border: none !important;
+}
+.ant-input-affix-wrapper >input.ant-input{
+  padding: 0 10px;
+}
+/* Authentication Pages */
+.authentication{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #005555;
+}
+.authentication-form{
+  width:400px ;
+}
+
+.authentication .card-title{
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: orangered;
+  color: aliceblue !important;
+  max-width: max-content !important;
+  padding: 7px 15px;
+  margin-left: -40px;
+  border-bottom-left-radius: 10px;
+}
