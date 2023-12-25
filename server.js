@@ -9,7 +9,9 @@ connectToMongo();
 // app.use(cors())
 app.use(express.json());
 const userRoute=require('./routes/userRoute');
+const adminRoutes=require('./routes/adminRoutes');
 app.use('/api/user',userRoute);
+app.use('/api/admin',adminRoutes);
 
 app.listen(port, () => {
     console.log(`Hospital backend listening on port ${port}`)

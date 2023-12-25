@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Form, Input } from 'antd';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import axios from 'axios';
@@ -11,7 +11,7 @@ const Login = () => {
   // console.log(loading)
   const [passwordVisible, setPasswordVisible] = useState(false);
   const dispatch=useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const onFinish = async (values) => {
     try {
       dispatch(showLoading());
@@ -20,7 +20,7 @@ const Login = () => {
       if (response.data.success) {
         toast.success(response.data.message);
         localStorage.setItem("token", response.data.data);
-        history.push('/');
+        navigate('/');
       } else {
         toast.error(response.data.message);
       }
@@ -50,7 +50,7 @@ const Login = () => {
           </Form.Item>
           <Button className='primary-button my-2' htmlType='submit'>
             LOGIN
-          </Button>
+          </Button><br />
           <Link to='/register' className='anchor mt-2'>
             CLICK HERE TO REGISTER
           </Link>

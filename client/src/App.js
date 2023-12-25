@@ -1,6 +1,6 @@
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route
 } from "react-router-dom";
 import Register from "./pages/Register";
@@ -11,11 +11,15 @@ import { Toaster } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import ProtectedRoute from './components/ProtectedRoute';
 import PublicRoute from './components/PublicRoute';
+import ApplyDoctor from "./pages/ApplyDoctor";
+import Notifications from "./pages/Notifications";
+import Users from "./pages/admin/Users";
+import Doctors from "./pages/admin/Doctors";
 function App() {
-  const {loading}=useSelector(state=>state.alerts)
+  const { loading } = useSelector(state => state.alerts)
   return (
     <Router>
-     { loading && <div className="loader-parent">
+      {loading && <div className="loader-parent">
         <div role="status">
           <svg aria-hidden="true" className="inline w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
@@ -24,20 +28,44 @@ function App() {
           {/* <span className="sr-only">Loading...</span> */}
         </div>
       </div>
-     }
+      }
       <Toaster
         position="top-right"
         reverseOrder={false}
         gutter={8}
         containerClassName="notification-toast"
       />
-      <Switch>
-    
-        <Route exact path="/login" render={() => <PublicRoute><Login /></PublicRoute>} />
-        <Route exact path="/register" render={() =><PublicRoute> <Register /></PublicRoute>} />
-        <Route exact path="/" render={() => <ProtectedRoute><Home/></ProtectedRoute>} />
-        <Route component={NotFound} />
-      </Switch>
+      <Routes>
+
+        <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+        <Route path="/register" element={<PublicRoute> <Register /></PublicRoute>} />
+        <Route path="/"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>} />
+        <Route path="/apply-doctor"
+          element={
+            <ProtectedRoute>
+              <ApplyDoctor/>
+            </ProtectedRoute>} />
+        <Route path="/admin/users"
+          element={
+            <ProtectedRoute>
+              <Users/>
+            </ProtectedRoute>} />
+        <Route path="/admin/doctors"
+          element={
+            <ProtectedRoute>
+            <Doctors/>
+            </ProtectedRoute>} />
+        <Route path="/notifications"
+          element={
+            <ProtectedRoute>
+              <Notifications/>
+            </ProtectedRoute>} />
+        <Route path="*" element={NotFound} />
+      </Routes>
     </Router>
   );
 }

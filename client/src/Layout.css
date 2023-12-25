@@ -1,3 +1,8 @@
+.logo{
+    color: aliceblue;
+    font-weight: bold;
+    font-size: xx-large;
+}
 .main{
     padding: 20px;
     height: 100vh;
@@ -31,6 +36,7 @@
     box-shadow: 0 0 2px gray;
     height: 82vh;
     width: 100%;
+    padding: 15px;
 }
 .menu{
     margin-top: 100px;
@@ -42,7 +48,8 @@
     text-decoration: none;
     font-size: 18px;
     /* border: 1px solid red; */
-    padding: 5px;
+    padding: 5px 20px 5px 5px;
+    /* padding: 5px; */
 }
 .menu-item:hover{
     background-color: #014141;
@@ -53,7 +60,7 @@
     color: rgba(240, 248, 255, 0.72);
     font-size: 18px;
     text-decoration: none;
-    margin:0 15px;
+    margin:0 10px;
     /* border: 1px solid red; */
     display: flex;
     align-items: center;
@@ -77,6 +84,10 @@ border-radius: 5px;
     color: black;
     padding-left: 10px;
   }
+  /* .ant-badge-count{
+    padding-left:-10px !important;
+    padding-bottom: -10px !important;
+  } */
   @media screen and  (max-width:760px){
     .menu{
         margin-top: 100px;

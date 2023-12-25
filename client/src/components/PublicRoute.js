@@ -1,9 +1,8 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom';
-const PublicRoute = (props) => {
-    const history = useHistory();
+import { Navigate } from 'react-router-dom';
+function PublicRoute (props)  {
     if(localStorage.getItem("token")){
-      return  history.push('/');
+      return <Navigate to='/'/>
     }else{
       return props.children;
       }

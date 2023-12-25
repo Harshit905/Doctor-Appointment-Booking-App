@@ -1,48 +1,52 @@
 import React, { useEffect } from 'react'
-import { useHistory } from 'react-router-dom';
-import { useSelector } from "react-redux"
+import { Navigate, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux"
 import axios from "axios"
-import { useDispatch } from 'react-redux';
-import { setUser } from '../redux/userSlice';
+import { setUser} from '../redux/userSlice';
 import { hideLoading, showLoading } from '../redux/alertsSlice';
-const ProtectedRoute = (props) => {
+function ProtectedRoute(props) {
 
-  const history = useHistory();
-  const user = useSelector((state) => state.user);
-  const dispatch=useDispatch();
+  const navigate = useNavigate();
+  const { user} = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const getUser = async () => {
     try {
       dispatch(showLoading());
-      const response=await axios.post("/api/user/get-user-by-id",{token:localStorage.getItem('token')},{
+      const response = await axios.post("/api/user/get-user-by-id", { token: localStorage.getItem('token') }, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem('token')
+          Authorization: `Bearer ${localStorage.getItem("token")}`
         }
       })
-      console.log(response.data)
+
+      console.log(response.data.data)
+      console.log(response.data.success)
       dispatch(hideLoading());
       if (response.data.success) {
-        dispatch(setUser=response.data.data)
+        dispatch(setUser(response.data.data));   
       } else {
-        history.push('/login');
+        localStorage.clear();
+        navigate('/login');
       }
     } catch (error) {
       dispatch(hideLoading());
-
-      history.push('/login');
+      localStorage.clear()
+      navigate('/login');
     }
   }
-console.log("lolo")
   useEffect(() => {
+    console.log("Inside useEffect", user);
     if (!user) {
-      getUser()
+      console.log("Fetching user");
+      getUser();
     }
-  }, [user])
+  }, [user]); // Add user as a dependency to trigger useEffect on user changes
 
-  if (localStorage.getItem("token")) {
+
+  if (localStorage.getItem('token')) {
     return props.children;
   } else {
-    return history.push('/login')
+    return <Navigate to="/login" />
   }
 }
 
-export default ProtectedRoute
+export default ProtectedRoute;
